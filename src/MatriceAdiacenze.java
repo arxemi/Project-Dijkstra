@@ -41,7 +41,7 @@ public class MatriceAdiacenze {
 		}
 	}
 	
-	public void dijkstra(int nodoR){
+	public int[] dijkstra(int nodoR){
 		
 		final int nodoRadice = nodoR-1; //nodo di partenza per il calcolo del cammino minimo
 		int nextNodo = nodoR-1; //nodo che cambia per ogni riga scansionata
@@ -93,7 +93,9 @@ public class MatriceAdiacenze {
 		}
 		
 		System.out.print("\n");
-		
+
+		int[] valoriMinimi = new int[6];
+		int c=0;
 		int priorNodo = 0; // nodo precedente 
 		for(int j=0; j<numNodi; j++){
 			int valoreMinimo = Integer.MAX_VALUE;
@@ -104,10 +106,16 @@ public class MatriceAdiacenze {
 						priorNodo = sinkTree[i][j].getNodoPrecedente();
 					}
 				}
-				System.out.print(valoreMinimo+","+priorNodo+" - ");
+				valoriMinimi[c] = valoreMinimo;
+				c +=1;
+			}
+			else{
+				valoriMinimi[c] = 0;
+				c +=1;
 			}
 		}
-		
+
+		return valoriMinimi;
 	}
 	
 	/*
@@ -128,8 +136,8 @@ public class MatriceAdiacenze {
 		ma.stmpTabAdiacenze();
 		
 		System.out.print("\n");
-		
-		ma.dijkstra(1);
-		
+
+		int[] prova = ma.dijkstra(5);
+		System.out.println(prova[0]+" "+prova[1]+" "+prova[2]+" "+prova[3]+" "+prova[4]+" "+prova[5]);
 	}*/
 }
