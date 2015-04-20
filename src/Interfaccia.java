@@ -35,6 +35,9 @@ public class Interfaccia extends JFrame{
 	private JButton btnCalc = new JButton("Calculate");
 	private JButton btnCancel = new JButton("Cancel");
 
+	private JLabel lblNodoRadice = new JLabel("Root node");
+	private JTextField txtNodoRadice = new JTextField(5);
+
 	private MatriceAdiacenze mtrDcz;
 
 	final Font globalFont = new Font("Arial", Font.BOLD, 16);
@@ -70,7 +73,7 @@ public class Interfaccia extends JFrame{
 		scpTable.getViewport().add(tbl);
 		pnlSouth.add(scpTable);
 
-		add(pnlSouth,BorderLayout.SOUTH);
+		add(pnlSouth, BorderLayout.SOUTH);
 
 		btnNodi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -81,7 +84,23 @@ public class Interfaccia extends JFrame{
 						ex.printStackTrace();
 					}
 				}
-				if(mtrDcz instanceof MatriceAdiacenze){
+				if (mtrDcz instanceof MatriceAdiacenze) {
+					btnNodi.setEnabled(false);
+					txtNodi.setEditable(false);
+				}
+			}
+		});
+
+		txtNodi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!txtNodi.getText().equals("") && !txtNodi.getText().equals("0")) {
+					try {
+						mtrDcz = new MatriceAdiacenze(Integer.parseInt(txtNodi.getText()));
+					} catch (NumberFormatException ex) {
+						ex.printStackTrace();
+					}
+				}
+				if (mtrDcz instanceof MatriceAdiacenze) {
 					btnNodi.setEnabled(false);
 					txtNodi.setEditable(false);
 				}
@@ -102,21 +121,84 @@ public class Interfaccia extends JFrame{
 			}
 		});
 
+		txtInputDistance.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!txtInputFrom.getText().equals("") && !txtInputTo.getText().equals("") && !txtInputDistance.getText().equals("")
+						&& mtrDcz instanceof MatriceAdiacenze) {
+					dtm.addRow(new Object[]{
+							txtInputFrom.getText(), txtInputTo.getText(), txtInputDistance.getText()
+					});
+					mtrDcz.addCoppiaVertici(new CoppiaVertici(Integer.parseInt(txtInputFrom.getText()),
+							Integer.parseInt(txtInputTo.getText()),
+							Integer.parseInt(txtInputDistance.getText())));
+				}
+			}
+		});
+
+		btnCalc.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int[] sinkTree = mtrDcz.dijkstra(Integer.parseInt(txtNodoRadice.getText()));
+				String outputSinkTree = "From      To         Distance\n";
+						for(int i=0;i<Integer.parseInt(txtNodi.getText());i++){
+							if(sinkTree[i] == Integer.MAX_VALUE)
+								outputSinkTree +=txtNodoRadice.getText()+"             "+(i+1)+"           "+"\u221E \n";
+							else
+								outputSinkTree +=txtNodoRadice.getText()+"             "+(i+1)+"           "+sinkTree[i]+"\n";
+						}
+
+				JOptionPane.showMessageDialog(null,
+						outputSinkTree,
+						"SinkTree",
+						JOptionPane.INFORMATION_MESSAGE);
+
+			}
+		});
+
+		txtNodoRadice.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int[] sinkTree = mtrDcz.dijkstra(Integer.parseInt(txtNodoRadice.getText()));
+				String outputSinkTree = "From      To         Distance\n";
+				for(int i=0;i<Integer.parseInt(txtNodi.getText());i++){
+					if(sinkTree[i] == Integer.MAX_VALUE)
+						outputSinkTree +=txtNodoRadice.getText()+"             "+(i+1)+"           "+"\u221E \n";
+					else
+						outputSinkTree +=txtNodoRadice.getText()+"             "+(i+1)+"           "+sinkTree[i]+"\n";
+				}
+
+				JOptionPane.showMessageDialog(null,
+						outputSinkTree,
+						"SinkTree",
+						JOptionPane.INFORMATION_MESSAGE);
+
+			}
+		});
+
 		setResizable(false);
 		setBounds(450, 40, 540, 680);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+
+
 	private void initPanelCenter(){
+
+		lblNodoRadice.setFont(globalFont);
+
+
+		txtNodoRadice.setFont(globalFont);
+		txtNodoRadice.setHorizontalAlignment(JTextField.CENTER);
+
 		pnlCenter.add(lblFrom);
 
 		txtInputFrom.setHorizontalAlignment(JTextField.CENTER);
 		txtInputFrom.setFont(globalFont);
 		pnlCenter.add(txtInputFrom);
-		pnlCenter.add(new JLabel("    "));
-		pnlCenter.add(new JLabel("    "));
-		//pnlCenter.add(new JLabel("    "));
+		pnlCenter.add(lblNodoRadice);
+		pnlCenter.add(txtNodoRadice);
+
 
 		pnlCenter.add(lblTo);
 		txtInputTo.setHorizontalAlignment(JTextField.CENTER);
@@ -124,7 +206,7 @@ public class Interfaccia extends JFrame{
 		pnlCenter.add(txtInputTo);
 		pnlCenter.add(new JLabel());
 		pnlCenter.add(new JLabel());
-		//pnlCenter.add(new JLabel());
+
 
 		pnlCenter.add(lblDistance);
 		txtInputDistance.setHorizontalAlignment(JTextField.CENTER);
@@ -132,11 +214,11 @@ public class Interfaccia extends JFrame{
 		pnlCenter.add(txtInputDistance);
 		pnlCenter.add(new JLabel());
 		pnlCenter.add(new JLabel());
-		//pnlCenter.add(new JLabel());
+
 
 		pnlCenter.add(new JLabel());
 		pnlCenter.add(btnEntry);
-		//pnlCenter.add(new JLabel());
+
 		pnlCenter.add(btnCalc);
 		pnlCenter.add(btnCancel);
 
