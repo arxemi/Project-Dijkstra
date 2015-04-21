@@ -55,7 +55,6 @@ public class MatriceAdiacenze {
 			}
 		}
 
-		//for(int j=0;j<tabAdiacenze.length;j++){
 		int j=0;
 		while(j<tabAdiacenze.length){
 			for(int i=0;i<tabAdiacenze.length;i++){
@@ -114,7 +113,6 @@ public class MatriceAdiacenze {
 			}
 		}
 
-		//for(int j=0;j<tabAdiacenze.length;j++){
 		int j=0;
 		while(j<tabAdiacenze.length){
 			for(int i=0;i<tabAdiacenze.length;i++){
@@ -137,8 +135,10 @@ public class MatriceAdiacenze {
 			j +=1;
 		}
 
-		//stampa provvisoria
-		stmpSinkTree(sinkTree, nodoRadice);
+		/**
+		 * utilizzato per il debug
+		 */
+		//stmpSinkTree(sinkTree, nodoRadice);
 
 		int[] valoriMinimi = new int[6];
 		int c=0;
@@ -200,25 +200,8 @@ public class MatriceAdiacenze {
 	}
 	
 
-	public static void main(String[] argv){
-		MatriceAdiacenze ma = new MatriceAdiacenze(6);
-		
-		ma.addCoppiaVertici(new CoppiaVertici(1, 2, 1));
-		ma.addCoppiaVertici(new CoppiaVertici(1, 6, 2));
-		ma.addCoppiaVertici(new CoppiaVertici(1, 5, 5));
-		ma.addCoppiaVertici(new CoppiaVertici(2, 3, 1));
-		ma.addCoppiaVertici(new CoppiaVertici(2, 5, 3));
-		ma.addCoppiaVertici(new CoppiaVertici(2, 6, 2));
-		ma.addCoppiaVertici(new CoppiaVertici(3, 5, 1));
-		ma.addCoppiaVertici(new CoppiaVertici(3, 4, 2));
-		ma.addCoppiaVertici(new CoppiaVertici(4, 5, 5));
-		ma.addCoppiaVertici(new CoppiaVertici(5, 6, 3));
-		
-		ma.stmpTabAdiacenze();
-		
-		System.out.print("\n");
-
+	/*
 		int[] prova = ma.dijkstra(6);
 		System.out.println(prova[0]+" "+prova[1]+" "+prova[2]+" "+prova[3]+" "+prova[4]+" "+prova[5]);
-	}
+	*/
 }

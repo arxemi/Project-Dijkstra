@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.table.*;
 import javax.swing.*;
-import javax.swing.text.MaskFormatter;
 
 public class Interfaccia extends JFrame{
 	
@@ -68,7 +67,6 @@ public class Interfaccia extends JFrame{
 		dtm.setColumnIdentifiers(new String[]{
 				"From", "To", "Distance"});
 		tbl.setModel(dtm);
-
 
 		scpTable.getViewport().add(tbl);
 		pnlSouth.add(scpTable);
@@ -138,19 +136,28 @@ public class Interfaccia extends JFrame{
 		btnCalc.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int[] sinkTree = mtrDcz.dijkstra(Integer.parseInt(txtNodoRadice.getText()));
-				String outputSinkTree = "From      To         Distance\n";
-						for(int i=0;i<Integer.parseInt(txtNodi.getText());i++){
-							if(sinkTree[i] == Integer.MAX_VALUE)
-								outputSinkTree +=txtNodoRadice.getText()+"             "+(i+1)+"           "+"\u221E \n";
-							else
-								outputSinkTree +=txtNodoRadice.getText()+"             "+(i+1)+"           "+sinkTree[i]+"\n";
-						}
+				Integer nodoRadiceValore = null;
+				try {
+					nodoRadiceValore = Integer.parseInt(txtNodoRadice.getText());
+				}
+				catch (NumberFormatException ex){
+					ex.printStackTrace();
+				}
+				if(nodoRadiceValore instanceof Integer) {
+					int[] sinkTree = mtrDcz.dijkstra(nodoRadiceValore);
+					String outputSinkTree = "From      To         Distance\n";
+					for (int i = 0; i < Integer.parseInt(txtNodi.getText()); i++) {
+						if (sinkTree[i] == Integer.MAX_VALUE)
+							outputSinkTree += txtNodoRadice.getText() + "             " + (i + 1) + "           " + "\u221E \n";
+						else
+							outputSinkTree += txtNodoRadice.getText() + "             " + (i + 1) + "           " + sinkTree[i] + "\n";
+					}
 
-				JOptionPane.showMessageDialog(null,
-						outputSinkTree,
-						"SinkTree",
-						JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,
+							outputSinkTree,
+							"SinkTree",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
 
 			}
 		});
@@ -158,20 +165,48 @@ public class Interfaccia extends JFrame{
 		txtNodoRadice.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int[] sinkTree = mtrDcz.dijkstra(Integer.parseInt(txtNodoRadice.getText()));
-				String outputSinkTree = "From      To         Distance\n";
-				for(int i=0;i<Integer.parseInt(txtNodi.getText());i++){
-					if(sinkTree[i] == Integer.MAX_VALUE)
-						outputSinkTree +=txtNodoRadice.getText()+"             "+(i+1)+"           "+"\u221E \n";
-					else
-						outputSinkTree +=txtNodoRadice.getText()+"             "+(i+1)+"           "+sinkTree[i]+"\n";
+				Integer nodoRadiceValore = null;
+				try {
+					nodoRadiceValore = Integer.parseInt(txtNodoRadice.getText());
+				}
+				catch (NumberFormatException ex){
+					ex.printStackTrace();
+				}
+				if(nodoRadiceValore instanceof Integer) {
+					int[] sinkTree = mtrDcz.dijkstra(nodoRadiceValore);
+					String outputSinkTree = "From      To         Distance\n";
+					for (int i = 0; i < Integer.parseInt(txtNodi.getText()); i++) {
+						if (sinkTree[i] == Integer.MAX_VALUE)
+							outputSinkTree += txtNodoRadice.getText() + "             " + (i + 1) + "           " + "\u221E \n";
+						else
+							outputSinkTree += txtNodoRadice.getText() + "             " + (i + 1) + "           " + sinkTree[i] + "\n";
+					}
+
+					JOptionPane.showMessageDialog(null,
+							outputSinkTree,
+							"SinkTree",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 
-				JOptionPane.showMessageDialog(null,
-						outputSinkTree,
-						"SinkTree",
-						JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 
+		btnCancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(tbl.isRowSelected(tbl.getSelectedRow())){
+					dtm.removeRow(tbl.getSelectedRow());
+				}
+				else {
+					txtNodi.setEditable(true);
+					txtNodi.setText("");
+					btnNodi.setEnabled(true);
+					txtInputTo.setText("");
+					txtInputFrom.setText("");
+					txtInputDistance.setText("");
+					txtNodoRadice.setText("");
+					dtm.setRowCount(0);
+				}
 			}
 		});
 
@@ -181,12 +216,9 @@ public class Interfaccia extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-
-
 	private void initPanelCenter(){
 
 		lblNodoRadice.setFont(globalFont);
-
 
 		txtNodoRadice.setFont(globalFont);
 		txtNodoRadice.setHorizontalAlignment(JTextField.CENTER);
@@ -198,7 +230,6 @@ public class Interfaccia extends JFrame{
 		pnlCenter.add(txtInputFrom);
 		pnlCenter.add(lblNodoRadice);
 		pnlCenter.add(txtNodoRadice);
-
 
 		pnlCenter.add(lblTo);
 		txtInputTo.setHorizontalAlignment(JTextField.CENTER);
@@ -215,13 +246,11 @@ public class Interfaccia extends JFrame{
 		pnlCenter.add(new JLabel());
 		pnlCenter.add(new JLabel());
 
-
 		pnlCenter.add(new JLabel());
 		pnlCenter.add(btnEntry);
 
 		pnlCenter.add(btnCalc);
 		pnlCenter.add(btnCancel);
-
 
 		pnlGlobalCenter.add(pnlCenter);
 
