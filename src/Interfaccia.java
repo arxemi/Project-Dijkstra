@@ -112,9 +112,12 @@ public class Interfaccia extends JFrame{
 					dtm.addRow(new Object[]{
 							txtInputFrom.getText(), txtInputTo.getText(), txtInputDistance.getText()
 					});
-					mtrDcz.addCoppiaVertici(new CoppiaVertici(Integer.parseInt(txtInputFrom.getText()),
+					mtrDcz.addVertex(new Vertex(Integer.parseInt(txtInputFrom.getText()),
 							Integer.parseInt(txtInputTo.getText()),
 							Integer.parseInt(txtInputDistance.getText())));
+					txtInputFrom.setText("");
+					txtInputTo.setText("");
+					txtInputDistance.setText("");
 				}
 			}
 		});
@@ -126,9 +129,12 @@ public class Interfaccia extends JFrame{
 					dtm.addRow(new Object[]{
 							txtInputFrom.getText(), txtInputTo.getText(), txtInputDistance.getText()
 					});
-					mtrDcz.addCoppiaVertici(new CoppiaVertici(Integer.parseInt(txtInputFrom.getText()),
+					mtrDcz.addVertex(new Vertex(Integer.parseInt(txtInputFrom.getText()),
 							Integer.parseInt(txtInputTo.getText()),
 							Integer.parseInt(txtInputDistance.getText())));
+					txtInputFrom.setText("");
+					txtInputTo.setText("");
+					txtInputDistance.setText("");
 				}
 			}
 		});

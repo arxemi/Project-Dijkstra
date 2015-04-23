@@ -1,10 +1,10 @@
-public class CoppiaVertici {
+public class Vertex {
 	
 	private int verticePrimo;
 	private int verticeSecondo;
 	private int peso;
 	
-	public CoppiaVertici(int verticePrimo, int verticeSecondo, int peso){
+	public Vertex(int verticePrimo, int verticeSecondo, int peso){
 		this.setVerticePrimo(verticePrimo);
 		this.setVerticeSecondo(verticeSecondo);
 		this.peso = peso;
