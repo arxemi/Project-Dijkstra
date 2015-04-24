@@ -112,9 +112,14 @@ public class Interfaccia extends JFrame{
 					dtm.addRow(new Object[]{
 							txtInputFrom.getText(), txtInputTo.getText(), txtInputDistance.getText()
 					});
-					mtrDcz.addVertex(new Vertex(Integer.parseInt(txtInputFrom.getText()),
-							Integer.parseInt(txtInputTo.getText()),
-							Integer.parseInt(txtInputDistance.getText())));
+					try {
+						mtrDcz.addVertex(new Vertex(Integer.parseInt(txtInputFrom.getText()),
+								Integer.parseInt(txtInputTo.getText()),
+								Integer.parseInt(txtInputDistance.getText())));
+					}
+					catch (NumberFormatException ex){
+						ex.printStackTrace();
+					}
 					txtInputFrom.setText("");
 					txtInputTo.setText("");
 					txtInputDistance.setText("");
@@ -129,9 +134,14 @@ public class Interfaccia extends JFrame{
 					dtm.addRow(new Object[]{
 							txtInputFrom.getText(), txtInputTo.getText(), txtInputDistance.getText()
 					});
-					mtrDcz.addVertex(new Vertex(Integer.parseInt(txtInputFrom.getText()),
-							Integer.parseInt(txtInputTo.getText()),
-							Integer.parseInt(txtInputDistance.getText())));
+					try {
+						mtrDcz.addVertex(new Vertex(Integer.parseInt(txtInputFrom.getText()),
+								Integer.parseInt(txtInputTo.getText()),
+								Integer.parseInt(txtInputDistance.getText())));
+					}
+					catch (NumberFormatException ex){
+						ex.printStackTrace();
+					}
 					txtInputFrom.setText("");
 					txtInputTo.setText("");
 					txtInputDistance.setText("");
@@ -149,7 +159,7 @@ public class Interfaccia extends JFrame{
 				catch (NumberFormatException ex){
 					ex.printStackTrace();
 				}
-				if(nodoRadiceValore instanceof Integer) {
+				if(nodoRadiceValore instanceof Integer && mtrDcz instanceof MatriceAdiacenze) {
 					int[] sinkTree = mtrDcz.dijkstra(nodoRadiceValore);
 					String outputSinkTree = "From      To         Distance\n";
 					for (int i = 0; i < Integer.parseInt(txtNodi.getText()); i++) {
