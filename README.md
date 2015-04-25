@@ -5,6 +5,6 @@ STATO: working progress.
 LINGUAGGIO: Java, con libreria grafica SWING.
 
 NEWS: Il nuovo algoritmo, per il calcolo dei cammini,
-sembra funzionare egregiamente. Testato su due reti, effettuata anche 
-la verifica su tutti i nodi delle 2 reti.
+sembra funzionare egregiamente. Testato su 7 reti, senza alcun margine
+di errore, calcola il cammino minimo in modo perfetto.
 
