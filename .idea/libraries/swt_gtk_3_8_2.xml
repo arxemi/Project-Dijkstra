@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="swt-gtk-3.8.2">
+    <CLASSES>
+      <root url="jar:///usr/lib/java/swt-gtk-3.8.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

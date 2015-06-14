@@ -73,79 +73,31 @@ public class Interfaccia extends JFrame{
 
 		add(pnlSouth, BorderLayout.SOUTH);
 
+		/*** problema con il l'aquisizione del numero di nodi ***/
+
 		btnNodi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!txtNodi.getText().equals("") && !txtNodi.getText().equals("0")) {
-					try {
-						mtrDcz = new MatriceAdiacenze(Integer.parseInt(txtNodi.getText()));
-					} catch (NumberFormatException ex) {
-						ex.printStackTrace();
-					}
-				}
-				if (mtrDcz instanceof MatriceAdiacenze) {
-					btnNodi.setEnabled(false);
-					txtNodi.setEditable(false);
-				}
+				setNumNodi();
 			}
 		});
 
 		txtNodi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!txtNodi.getText().equals("") && !txtNodi.getText().equals("0")) {
-					try {
-						mtrDcz = new MatriceAdiacenze(Integer.parseInt(txtNodi.getText()));
-					} catch (NumberFormatException ex) {
-						ex.printStackTrace();
-					}
-				}
-				if (mtrDcz instanceof MatriceAdiacenze) {
-					btnNodi.setEnabled(false);
-					txtNodi.setEditable(false);
-				}
+				setNumNodi();
 			}
 		});
 
+		/********************************************************/
+
 		btnEntry.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!txtInputFrom.getText().equals("") && !txtInputTo.getText().equals("") && !txtInputDistance.getText().equals("")
-						&& mtrDcz instanceof MatriceAdiacenze) {
-					dtm.addRow(new Object[]{
-							txtInputFrom.getText(), txtInputTo.getText(), txtInputDistance.getText()
-					});
-					try {
-						mtrDcz.addVertex(new Vertex(Integer.parseInt(txtInputFrom.getText()),
-								Integer.parseInt(txtInputTo.getText()),
-								Integer.parseInt(txtInputDistance.getText())));
-					}
-					catch (NumberFormatException ex){
-						ex.printStackTrace();
-					}
-					txtInputFrom.setText("");
-					txtInputTo.setText("");
-					txtInputDistance.setText("");
-				}
+				setNewEntry();
 			}
 		});
 
 		txtInputDistance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!txtInputFrom.getText().equals("") && !txtInputTo.getText().equals("") && !txtInputDistance.getText().equals("")
-						&& mtrDcz instanceof MatriceAdiacenze) {
-					dtm.addRow(new Object[]{
-							txtInputFrom.getText(), txtInputTo.getText(), txtInputDistance.getText()
-					});
-					try {
-						mtrDcz.addVertex(new Vertex(Integer.parseInt(txtInputFrom.getText()),
-								Integer.parseInt(txtInputTo.getText()),
-								Integer.parseInt(txtInputDistance.getText())));
-					}
-					catch (NumberFormatException ex){
-						ex.printStackTrace();
-					}
-					txtInputFrom.setText("");
-					txtInputTo.setText("");
-					txtInputDistance.setText("");
-				}
+				setNewEntry();
 			}
 		});
 
@@ -231,6 +183,47 @@ public class Interfaccia extends JFrame{
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+
+	private void setNumNodi(){
+		Integer numNodiTxt = null;
+		try{
+			numNodiTxt = Integer.parseInt(txtNodi.getText());
+		}catch (NumberFormatException w){
+			w.printStackTrace();
+		}
+		if (numNodiTxt.intValue() > Integer.valueOf(1) && numNodiTxt instanceof Integer) {
+			try {
+				mtrDcz = new MatriceAdiacenze(Integer.parseInt(txtNodi.getText()));
+			} catch (NumberFormatException ex) {
+				ex.printStackTrace();
+			}
+		}
+		if (mtrDcz instanceof MatriceAdiacenze) {
+			btnNodi.setEnabled(false);
+			txtNodi.setEditable(false);
+		}
+	}
+
+	private void setNewEntry(){
+		if (!txtInputFrom.getText().equals("") && !txtInputTo.getText().equals("") && !txtInputDistance.getText().equals("")
+				&& mtrDcz instanceof MatriceAdiacenze) {
+			dtm.addRow(new Object[]{
+					txtInputFrom.getText(), txtInputTo.getText(), txtInputDistance.getText()
+			});
+			try {
+				mtrDcz.addVertex(new Vertex(Integer.parseInt(txtInputFrom.getText()),
+						Integer.parseInt(txtInputTo.getText()),
+						Integer.parseInt(txtInputDistance.getText())));
+			}
+			catch (NumberFormatException ex){
+				ex.printStackTrace();
+			}
+			txtInputFrom.setText("");
+			txtInputTo.setText("");
+			txtInputDistance.setText("");
+		}
+	}
+
 
 	private void initPanelCenter(){
 

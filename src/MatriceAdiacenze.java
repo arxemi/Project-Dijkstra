@@ -97,36 +97,4 @@ public class MatriceAdiacenze {
 		}
 		return flag;
 	}
-
-	/*
-	public static void main(String[] argv){
-		MatriceAdiacenze mtr = new MatriceAdiacenze(6);
-
-		//****** RETE 1
-		mtr.addVertex(new Vertex(1,2,2));
-		mtr.addVertex(new Vertex(1,6,4));
-		mtr.addVertex(new Vertex(2,3,10));
-		mtr.addVertex(new Vertex(2,5,8));
-		mtr.addVertex(new Vertex(2,6,1));
-		mtr.addVertex(new Vertex(3,5,2));
-		mtr.addVertex(new Vertex(3,4,2));
-		mtr.addVertex(new Vertex(4,5,6));
-		mtr.addVertex(new Vertex(5,6,5));
-
-		//***** RETE 2
-		mtr.addVertex(new Vertex(1,2,1));
-		mtr.addVertex(new Vertex(1,6,2));
-		mtr.addVertex(new Vertex(1,5,5));
-		mtr.addVertex(new Vertex(2,3,1));
-		mtr.addVertex(new Vertex(2,6,2));
-		mtr.addVertex(new Vertex(2,5,3));
-		mtr.addVertex(new Vertex(3,5,1));
-		mtr.addVertex(new Vertex(3,4,2));
-		mtr.addVertex(new Vertex(4,5,5));
-		mtr.addVertex(new Vertex(5,6,3));
-
-		mtr.stmpTabAdiacenze();
-		int[] prova = mtr.dijkstra(5);
-		System.out.println(prova[0]+" "+prova[1]+" "+prova[2]+" "+prova[3]+" "+prova[4]+" "+prova[5]);
-	}*/
 }
