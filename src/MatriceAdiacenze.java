@@ -43,16 +43,19 @@ public class MatriceAdiacenze {
 		//costante, nodo radice
 		final int nodoRadice = nodoR-1;
 
-
 		int nextNodo = nodoRadice, pesoAttuale, distanzaPeso = 0;
 
 		// dichiarazione di due vettori, etichette temporanee e permanenti
 		int et_perm[] = new int[numNodi];
 		int et_temp[] = new int[numNodi];
 
+		final int VALUE_MAX_INFINITE = 999999;
+
 		//inizializzazione vettore etichette temporanee
-		for(int i=0;i<numNodi;i++) et_temp[i] = 999;
-		for(int i=0;i<numNodi;i++) et_perm[i] = 999;
+		for(int i=0;i<numNodi;i++) {
+			et_temp[i] = VALUE_MAX_INFINITE;
+			et_perm[i] = VALUE_MAX_INFINITE;
+		}
 
 		// il nodo radice viene subito inserito nelle etichette permanenti con valore 0
 		et_perm[nodoRadice] = 0;
@@ -64,7 +67,7 @@ public class MatriceAdiacenze {
 					et_temp[i] = tabAdiacenze[nextNodo][i].getPeso()+distanzaPeso;
 				}
 			}
-			pesoAttuale = 999;
+			pesoAttuale = VALUE_MAX_INFINITE;
 			for(int i=0;i<numNodi;i++){
 				if(et_temp[i] < pesoAttuale && ctrlNodo(et_perm,i)){
 					pesoAttuale = et_temp[i];
@@ -79,8 +82,9 @@ public class MatriceAdiacenze {
 	}
 
 	private boolean ctrlNodo(int vet[],int nodo){
+		final int VALUE_MAX_INFINITE = 999999;
 		boolean flag = false;
-		if(vet[nodo] == 999){
+		if(vet[nodo] == VALUE_MAX_INFINITE){
 			flag = true;
 		}
 		return flag;
@@ -88,9 +92,10 @@ public class MatriceAdiacenze {
 
 	//verifica se il vettore etichette permanenti e ancora vuoto o meno
 	private boolean empty(int vet[]){
+		final int VALUE_MAX_INFINITE = 999999;
 		boolean flag = false;
 		for(int i=0;i<numNodi;i++){
-			if(vet[i] == 999) {
+			if(vet[i] == VALUE_MAX_INFINITE) {
 				flag = true;
 				break;
 			}

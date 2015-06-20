@@ -104,58 +104,14 @@ public class Interfaccia extends JFrame{
 		btnCalc.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Integer nodoRadiceValore = null;
-				try {
-					nodoRadiceValore = Integer.parseInt(txtNodoRadice.getText());
-				}
-				catch (NumberFormatException ex){
-					ex.printStackTrace();
-				}
-				if(nodoRadiceValore instanceof Integer && mtrDcz instanceof MatriceAdiacenze) {
-					int[] sinkTree = mtrDcz.dijkstra(nodoRadiceValore);
-					String outputSinkTree = "From      To         Distance\n";
-					for (int i = 0; i < Integer.parseInt(txtNodi.getText()); i++) {
-						if (sinkTree[i] == Integer.MAX_VALUE)
-							outputSinkTree += txtNodoRadice.getText() + "             " + (i + 1) + "           " + "\u221E \n";
-						else
-							outputSinkTree += txtNodoRadice.getText() + "             " + (i + 1) + "           " + sinkTree[i] + "\n";
-					}
-
-					JOptionPane.showMessageDialog(null,
-							outputSinkTree,
-							"SinkTree",
-							JOptionPane.INFORMATION_MESSAGE);
-				}
-
+				calcSinkTree();
 			}
 		});
 
 		txtNodoRadice.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Integer nodoRadiceValore = null;
-				try {
-					nodoRadiceValore = Integer.parseInt(txtNodoRadice.getText());
-				}
-				catch (NumberFormatException ex){
-					ex.printStackTrace();
-				}
-				if(nodoRadiceValore instanceof Integer) {
-					int[] sinkTree = mtrDcz.dijkstra(nodoRadiceValore);
-					String outputSinkTree = "From      To         Distance\n";
-					for (int i = 0; i < Integer.parseInt(txtNodi.getText()); i++) {
-						if (sinkTree[i] == Integer.MAX_VALUE)
-							outputSinkTree += txtNodoRadice.getText() + "             " + (i + 1) + "           " + "\u221E \n";
-						else
-							outputSinkTree += txtNodoRadice.getText() + "             " + (i + 1) + "           " + sinkTree[i] + "\n";
-					}
-
-					JOptionPane.showMessageDialog(null,
-							outputSinkTree,
-							"SinkTree",
-							JOptionPane.INFORMATION_MESSAGE);
-				}
-
+				calcSinkTree();
 			}
 		});
 
@@ -221,6 +177,31 @@ public class Interfaccia extends JFrame{
 			txtInputFrom.setText("");
 			txtInputTo.setText("");
 			txtInputDistance.setText("");
+		}
+	}
+
+	private void calcSinkTree(){
+		Integer nodoRadiceValore = null;
+		try {
+			nodoRadiceValore = Integer.parseInt(txtNodoRadice.getText());
+		}
+		catch (NumberFormatException ex){
+			ex.printStackTrace();
+		}
+		if(nodoRadiceValore instanceof Integer && mtrDcz instanceof MatriceAdiacenze) {
+			int[] sinkTree = mtrDcz.dijkstra(nodoRadiceValore);
+			String outputSinkTree = "From      To         Distance\n";
+			for (int i = 0; i < Integer.parseInt(txtNodi.getText()); i++) {
+				if (sinkTree[i] == Integer.MAX_VALUE)
+					outputSinkTree += txtNodoRadice.getText() + "             " + (i + 1) + "           " + "\u221E \n";
+				else
+					outputSinkTree += txtNodoRadice.getText() + "             " + (i + 1) + "           " + sinkTree[i] + "\n";
+			}
+
+			JOptionPane.showMessageDialog(null,
+					outputSinkTree,
+					"SinkTree",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
